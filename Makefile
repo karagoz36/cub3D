@@ -6,7 +6,7 @@
 #    By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/07 13:15:22 by tkaragoz          #+#    #+#              #
-#    Updated: 2024/10/07 14:57:17 by tkaragoz         ###   ########.fr        #
+#    Updated: 2024/10/07 15:49:05 by tkaragoz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 MLX_DIR = minilibx
-MLX = -L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+MLX = -L $(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm
 
 LIBFT = $(LIBFT_DIR)/libft.a
 
