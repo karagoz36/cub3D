@@ -1,39 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 13:57:58 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/07 18:41:23 by tkaragoz         ###   ########.fr       */
+/*   Created: 2024/10/07 18:41:28 by tkaragoz          #+#    #+#             */
+/*   Updated: 2024/10/07 19:24:43 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_arg(int ac, char **av)
+static int	parse_line(char *line)
 {
-	int	i;
 
-	if (ac != 2)
-		return (errno = EINVAL, perror("Error in argument!"),
-			EXIT_FAILURE);
-	i = 0;
-	while (av[1][i] != '.')
-		i++;
-	if (i == 0 || ft_strncmp(av[1] + i, ".cub\0", 5))
-		return (errno = EINVAL, perror("Invalid map name!"), EXIT_FAILURE);
-	return (EXIT_SUCCESS);
 }
 
-
-
-int	main(int argc, char **argv)
+int	check_map(char *fname)
 {
-	if (check_arg(argc, argv))
-		return (EXIT_FAILURE);
-	if (check_map(argv[1]))
-		return (EXIT_FAILURE);
+	int		i;
+	int		fd;
+	char	*line;
+
+	fd = open(fname, O_RDONLY);
+	if (fd < 0)
+		return (errno = EINVAL, perror("Error opening map file!"),
+			EXIT_FAILURE);
+	i = 0;
+	line = get_next_line(fd);
+	while (line > 0)
+	{
+		if (parse_line(line, i++))
+			return (free(line), close(fd), EXIT_FAILURE);
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
 	return (EXIT_SUCCESS);
 }

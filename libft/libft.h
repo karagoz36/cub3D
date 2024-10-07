@@ -5,15 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 13:33:50 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/05/23 14:20:46 by tkaragoz         ###   ########.fr       */
+/*   Created: 2024/10/07 18:09:11 by tkaragoz          #+#    #+#             */
+/*   Updated: 2024/10/07 18:10:35 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include<unistd.h>
-# include<stdlib.h>
+
+# include <unistd.h>
+# include <stdlib.h>
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
@@ -64,5 +65,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
+
+char	*get_next_line(int fd);
 
 #endif
