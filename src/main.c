@@ -6,11 +6,12 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:57:58 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/07 13:58:13 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:54:38 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	main(int argc, char **argv)
 {
+	argv[argc]=argv[argc];
 	return (0);
 }
