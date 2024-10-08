@@ -6,7 +6,7 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:51:28 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/07 18:41:47 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:52:53 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,17 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <string.h>
 
-int	check_map(char *fname);
+typedef struct s_data
+{
+	char	**map;
+	int		fd;
+	int		m_len;
+	int		m_width;
+}			t_data;
+
+int	get_map(t_data *data, char *f_name);
+int	build_map(t_data *data, char *line, int ln);
 
 #endif
