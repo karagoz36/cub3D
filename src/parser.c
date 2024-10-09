@@ -6,64 +6,42 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 18:41:28 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/09 15:48:39 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:26:02 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	floor_ceiling(char *line, t_texture *texture)
-{
-	char	**clr;
-
-	if (texture->color)
-		return (EXIT_FAILURE);
-	while (*line == ' ')
-		line++;
-	clr = ft_split(line, ',');
-	texture->color = convert_trgb(0, ft_atoi(clr[0]), \
-		ft_atoi(clr[1]), ft_atoi(clr[2]));
-	ft_free(clr);
-	return (EXIT_SUCCESS);
-}
-
-int	check_textures(char *line, t_data *data)
-{
-	if (!ft_strncmp("NO ", line, 3))
-		return (check_add_texture(line + 3, &data->texture[N]));
-	else if (!ft_strncmp("SO ", line, 3))
-		return (check_add_texture(line + 3, &data->texture[S]));
-	else if (!ft_strncmp("WE ", line, 3))
-		return (check_add_texture(line + 3, &data->texture[W]));
-	else if (!ft_strncmp("EA ", line, 3))
-		return (check_add_texture(line + 3, &data->texture[E]));
-	else if (!ft_strncmp("F ", line, 2))
-		return (floor_ceiling(line + 2, &data->texture[F]));
-	else if (!ft_strncmp("C ", line, 2))
-		return (floor_ceiling(line + 2, &data->texture[C]));
-	return (EXIT_FAILURE);
-}
-
-int	get_textures(t_data *data)
+int	get_map(t_data *data)
 {
 	int		i;
 	char	*line;
 
 	line = get_next_line(data->fd);
 	if (!line)
-		return (EXIT_FAILURE);
-	i = 0;
-	while (line && i < 6)
+		return (free(line), EXIT_FAILURE);
+	while (line[0] == '\n')
 	{
-		if (*line != '\n')
-		{
-			if (check_textures(line, data))
-				return (free(line), clean_textures(data->texture), 1);
-			i++;
-		}
 		free(line);
 		line = get_next_line(data->fd);
+		if (!line)
+			return (free(line), EXIT_FAILURE);
 	}
+	data->map = ft_calloc(data->m_max + 1, sizeof(char *));
+	i = 0;
+	while (line)
+	{
+		data->map[i] = ft_strdup(line);
+		free(line);
+		if (!data->map[i])
+			return (ft_free(data->map), EXIT_FAILURE);
+		line = get_next_line(data->fd);
+		i++;
+	}
+	i = -1;
+	printf("%d %d %d\n", data->m_len, data->m_width, data->m_max);
+	while (data->map[++i])
+		printf("%s", data->map[i]);
 	return (EXIT_SUCCESS);
 }
 
@@ -74,7 +52,9 @@ int	parser(t_data *data, char *f_name)
 		return (ft_putendl_fd("Error\nError opening map file!", 2), 1);
 	if (get_textures(data))
 		return (close(data->fd), ft_putendl_fd("Error", 2), 1);
-	// if (build_map(data))
+	if (get_map(data))
+		return (close(data->fd), ft_putendl_fd("Error", 2), 1);
+	close(data->fd);
 	return (EXIT_SUCCESS);
 }
 
@@ -98,6 +78,10 @@ int	get_len_map(t_data *data, char *f_name)
 		line = get_next_line(data->fd);
 	}
 	data->m_len -= 6;
+	if (data->m_len > data->m_width)
+		data->m_max = data->m_len;
+	else
+		data->m_max = data->m_width;
 	close(data->fd);
 	return (EXIT_SUCCESS);
 }

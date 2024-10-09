@@ -6,7 +6,7 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:57:58 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/08 19:23:21 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/09 18:24:41 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ int	check_arg(int ac, char **av)
 	return (EXIT_SUCCESS);
 }
 
+void	free_data(t_data *data)
+{
+	clean_textures(data->texture);
+	ft_free(data->map);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -39,6 +45,6 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (parser(&data, argv[1]))
 		return (EXIT_FAILURE);
-	close(data.fd);
+	free_data(&data);
 	return (EXIT_SUCCESS);
 }
