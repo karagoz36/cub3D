@@ -6,7 +6,7 @@
 #    By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/07 13:15:22 by tkaragoz          #+#    #+#              #
-#    Updated: 2024/10/08 19:23:41 by tkaragoz         ###   ########.fr        #
+#    Updated: 2024/10/09 13:21:01 by tkaragoz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC_DIR = src
 OBJ_DIR = obj
 LIBFT_DIR = libft
 
-SRC_FILES = main.c parser.c
+SRC_FILES = main.c parser.c parser_utils.c
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))

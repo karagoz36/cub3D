@@ -6,72 +6,41 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 18:41:28 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/08 19:54:53 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/09 15:48:39 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// int	build_map(t_data *data, char *line, int ln)
-// {
-// 	int	len;
-
-// 	len = ft_strlen(line);
-// 	data->map[ln] = (sizeof(char *))malloc(sizeof(char) * (len + 1));
-
-// }
-
-
-// 	int	check_parse(char *line, t_data *data)
-// {
-// 	int	i;
-// 	if (!ft_strncmp("NO ", line, 3))
-// 		data->texture[N].check++;
-// 	else if (ft_strncmp("SO ", line, 3))
-// 		data->texture[S].check++;
-// 	else if (ft_strncmp("WE ", line, 3))
-// 		return (EXIT_SUCCESS);
-// 	else if (ft_strncmp("EA ", line, 3))
-// 		return (EXIT_SUCCESS);
-// 	else if (ft_strncmp("F ", line, 2))
-// 		return (EXIT_SUCCESS);
-// 	else if (ft_strncmp("C ", line, 2))
-// 		return (EXIT_SUCCESS);
-// 	i = 0;
-// 	while (data->m_len  && i < 6)
-// 		if (data->texture[i++].check != 1)
-// 			return (EXIT_FAILURE);
-// 	return (EXIT_SUCCESS);
-// }
-
-void	clean_textures(t_texture *texture)
+int	floor_ceiling(char *line, t_texture *texture)
 {
-	int	i;
+	char	**clr;
 
-	i = 0;
-	while (i < 4)
-		free(texture[i++].f_name);
-}
-
-int	check_add_texture(char *line, t_texture *texture)
-{
-	texture;
+	if (texture->color)
+		return (EXIT_FAILURE);
+	while (*line == ' ')
+		line++;
+	clr = ft_split(line, ',');
+	texture->color = convert_trgb(0, ft_atoi(clr[0]), \
+		ft_atoi(clr[1]), ft_atoi(clr[2]));
+	ft_free(clr);
+	return (EXIT_SUCCESS);
 }
 
 int	check_textures(char *line, t_data *data)
 {
-	if (ft_strncmp("NO ", line, 3))
+	if (!ft_strncmp("NO ", line, 3))
 		return (check_add_texture(line + 3, &data->texture[N]));
-	if (ft_strncmp("SO ", line, 3))
+	else if (!ft_strncmp("SO ", line, 3))
 		return (check_add_texture(line + 3, &data->texture[S]));
-	if (ft_strncmp("WE ", line, 3))
+	else if (!ft_strncmp("WE ", line, 3))
 		return (check_add_texture(line + 3, &data->texture[W]));
-	if (ft_strncmp("EA ", line, 3))
+	else if (!ft_strncmp("EA ", line, 3))
 		return (check_add_texture(line + 3, &data->texture[E]));
-	if (ft_strncmp("F ", line, 2))
-		return (check_add_texture(line + 2, &data->texture[F]));
-	if (ft_strncmp("C ", line, 2))
-		return (check_add_texture(line + 2, &data->texture[C]));
+	else if (!ft_strncmp("F ", line, 2))
+		return (floor_ceiling(line + 2, &data->texture[F]));
+	else if (!ft_strncmp("C ", line, 2))
+		return (floor_ceiling(line + 2, &data->texture[C]));
 	return (EXIT_FAILURE);
 }
 
@@ -86,7 +55,7 @@ int	get_textures(t_data *data)
 	i = 0;
 	while (line && i < 6)
 	{
-		if (line != '\n')
+		if (*line != '\n')
 		{
 			if (check_textures(line, data))
 				return (free(line), clean_textures(data->texture), 1);
@@ -95,13 +64,11 @@ int	get_textures(t_data *data)
 		free(line);
 		line = get_next_line(data->fd);
 	}
+	return (EXIT_SUCCESS);
 }
 
 int	parser(t_data *data, char *f_name)
 {
-	int		line_n;
-	char	*line;
-
 	data->fd = open(f_name, O_RDONLY);
 	if (data->fd < 0)
 		return (ft_putendl_fd("Error\nError opening map file!", 2), 1);
@@ -117,7 +84,7 @@ int	get_len_map(t_data *data, char *f_name)
 
 	data->fd = open(f_name, O_RDONLY);
 	if (data->fd < 0)
-		return (ft_putendl_fd("Error\nError opening map file!", 2),	1);
+		return (ft_putendl_fd("Error\nError opening map file!", 2), 1);
 	line = get_next_line(data->fd);
 	if (!line)
 		return (EXIT_FAILURE);
@@ -130,7 +97,6 @@ int	get_len_map(t_data *data, char *f_name)
 		free(line);
 		line = get_next_line(data->fd);
 	}
-
 	data->m_len -= 6;
 	close(data->fd);
 	return (EXIT_SUCCESS);
