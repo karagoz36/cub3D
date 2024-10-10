@@ -6,7 +6,7 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:51:28 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/09 17:48:51 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:36:16 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ typedef struct s_data
 	int			m_width;
 	int			floor;
 	int			ceiling;
+	int			start_x;
+	int			start_y;
+	int			p_dir;
 }				t_data;
 
 #endif

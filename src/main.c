@@ -6,7 +6,7 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:57:58 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/09 18:24:41 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/10 15:00:13 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ int	main(int argc, char **argv)
 	if (check_arg(argc, argv))
 		return (EXIT_FAILURE);
 	memset(&data, 0, sizeof(t_data));
-	if (get_len_map(&data, argv[1]))
-		return (EXIT_FAILURE);
 	if (parser(&data, argv[1]))
-		return (EXIT_FAILURE);
+		return (free_data(&data), EXIT_FAILURE);
 	free_data(&data);
 	return (EXIT_SUCCESS);
 }

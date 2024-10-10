@@ -6,16 +6,28 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:20:28 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/09 18:19:56 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/10 11:50:26 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+static int	verif_textures(t_texture *texture)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 6)
+		if (texture->check != 1)
+			return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
 static int	floor_ceiling(char *line, t_texture *texture)
 {
 	char	**clr;
 
+	texture->check++;
 	if (texture->color)
 		return (EXIT_FAILURE);
 	while (*line == ' ')
@@ -29,6 +41,7 @@ static int	floor_ceiling(char *line, t_texture *texture)
 
 static int	check_add_texture(char *line, t_texture *texture)
 {
+	texture->check++;
 	if (texture->f_name)
 		return (EXIT_FAILURE);
 	while (*line == ' ')
@@ -74,5 +87,7 @@ int	get_textures(t_data *data)
 		if (i != 6)
 			line = get_next_line(data->fd);
 	}
+	if (verif_textures(data->texture))
+		return (clean_textures(data->texture), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
