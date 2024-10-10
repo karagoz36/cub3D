@@ -6,7 +6,7 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:20:28 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/10 11:50:26 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/10 21:27:31 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ static int	floor_ceiling(char *line, t_texture *texture)
 	while (*line == ' ')
 		line++;
 	clr = ft_split(line, ',');
+	printf("%d %d %d\n",ft_atoi(clr[0]), ft_atoi(clr[1]), ft_atoi(clr[2]));
+
+	if (ft_atoi(clr[0]) < 0 || ft_atoi(clr[0]) > 255 \
+		|| ft_atoi(clr[1]) < 0 || ft_atoi(clr[1]) > 255 \
+		|| ft_atoi(clr[2]) < 0 || ft_atoi(clr[2]) > 255)
+		return (EXIT_FAILURE);
 	texture->color = convert_trgb(0, ft_atoi(clr[0]), \
 		ft_atoi(clr[1]), ft_atoi(clr[2]));
 	ft_free(clr);

@@ -6,11 +6,36 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:08:54 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/10 11:59:51 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/10 21:27:18 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	ft_atoi_3d(const char *str)
+{
+	int	number;
+	int	sign;
+	int	i;
+
+	number = 0;
+	sign = 1;
+	i = 0;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (ft_isdigit((unsigned char) str[i]))
+	{
+		number = (number * 10 + str[i] - '0');
+		i++;
+	}
+	return (sign * number);
+}
 
 void	clean_textures(t_texture *texture)
 {
