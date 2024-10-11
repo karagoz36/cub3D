@@ -6,7 +6,7 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:57:58 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/10 15:00:13 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/11 20:11:39 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	free_data(t_data *data)
 {
 	clean_textures(data->texture);
 	ft_free(data->map);
+	if (data->img.img)
+		mlx_destroy_image(data->mlx, data->image)
 }
 
 int	main(int argc, char **argv)
@@ -42,6 +44,8 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	memset(&data, 0, sizeof(t_data));
 	if (parser(&data, argv[1]))
+		return (free_data(&data), EXIT_FAILURE);
+	if (mlx_init(&data))
 		return (free_data(&data), EXIT_FAILURE);
 	free_data(&data);
 	return (EXIT_SUCCESS);

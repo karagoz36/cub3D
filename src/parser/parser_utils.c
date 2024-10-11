@@ -6,35 +6,43 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:08:54 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/10 21:27:18 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:47:59 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_atoi_3d(const char *str)
+static int	create_trgb(int t, int r, int g, int b)
 {
-	int	number;
-	int	sign;
+	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+int	ft_atoi_3d(const char *line)
+{
+	int	rgb[3];
+	int	check;
 	int	i;
 
-	number = 0;
-	sign = 1;
+	check = 0;
 	i = 0;
-	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+	while (line[i] == ' ')
 		i++;
-	if (str[i] == '-' || str[i] == '+')
+	while (line[i])
 	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
+		if (ft_isdigit(line[i]) && check < 3)
+			rgb[check] = (ft_atoi(line + i));
+		else
+			return (-1);
+		if (rgb[check] < 0 || rgb[check++] > 255)
+			return (-1);
+		while (ft_isdigit(line[i]))
+			i++;
+		if (line[i++] != ',' && check < 3)
+			return (-1);
 	}
-	while (ft_isdigit((unsigned char) str[i]))
-	{
-		number = (number * 10 + str[i] - '0');
-		i++;
-	}
-	return (sign * number);
+	if (check != 3)
+		return (-1);
+	return (create_trgb(0, rgb[0], rgb[1], rgb[2]));
 }
 
 void	clean_textures(t_texture *texture)
@@ -50,11 +58,6 @@ void	clean_textures(t_texture *texture)
 			texture[i].f_name = NULL;
 		}
 	}
-}
-
-int	convert_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
 }
 
 void	ft_free(char **str)

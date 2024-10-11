@@ -6,7 +6,7 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:51:28 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/10 16:36:16 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/11 18:41:42 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,21 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <string.h>
+# include <mlx.h>
 
 # include "parser.h"
 
+# define LENGTH 720
+# define WIDTH 1280
+
+typedef struct s_image
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		line_l;
+	int		endian;
+}	t_image;
 typedef struct s_data
 {
 	char		**map;
@@ -37,6 +49,9 @@ typedef struct s_data
 	int			start_x;
 	int			start_y;
 	int			p_dir;
+	void		*mlx;
+	void		*window;
+	t_image		img;
 }				t_data;
 
 #endif

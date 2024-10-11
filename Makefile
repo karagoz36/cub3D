@@ -6,7 +6,7 @@
 #    By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/07 13:15:22 by tkaragoz          #+#    #+#              #
-#    Updated: 2024/10/10 21:21:35 by tkaragoz         ###   ########.fr        #
+#    Updated: 2024/10/11 20:06:56 by tkaragoz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,26 +20,25 @@ PARSER_DIR = $(SRC_DIR)/parser
 OBJ_DIR = obj
 LIBFT_DIR = libft
 
-SRC_FILES = main.c
+SRC_FILES = main.c init_mlx.c
 PARSER_FILES = parser.c get_textures.c parser_utils.c check_map.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES)) $(addprefix $(PARSER_DIR)/, $(PARSER_FILES))
 OBJS = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
-PARSER_OBJS = $(patsubst $(PARSER_DIR)/%.c, $(OBJ_DIR)/parser/%.o, $(PARSER_FILES)) # 'parser' dosyalarının obje dosyaları için ayrı bir hedef tanımladım.
+PARSER_OBJS = $(patsubst $(PARSER_DIR)/%.c, $(OBJ_DIR)/parser/%.o, $(PARSER_FILES))
 
 
-MLX_DIR = minilibx
-MLX = -L $(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm
-
+MLX_DIR = mlx
+MLX = -L $(MLX_DIR) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+# -L $(MLX_DIR) -lmlx -L/usr/lib -lXext -lX11 -lm -lz
 LIBFT = $(LIBFT_DIR)/libft.a
 
-INCLUDES = -I includes -I $(LIBFT_DIR) #-I $(MLX_DIR)
+INCLUDES = -I includes -I $(LIBFT_DIR) -I $(MLX_DIR)
 
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT)  -o $(NAME)
-#$(MLX)
+	$(CC) $(CFLAGS) $(OBJS) $(MLX) $(LIBFT)  -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
