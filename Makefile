@@ -6,7 +6,7 @@
 #    By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/07 13:15:22 by tkaragoz          #+#    #+#              #
-#    Updated: 2024/10/11 20:06:56 by tkaragoz         ###   ########.fr        #
+#    Updated: 2024/10/14 13:26:31 by tkaragoz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ PARSER_DIR = $(SRC_DIR)/parser
 OBJ_DIR = obj
 LIBFT_DIR = libft
 
-SRC_FILES = main.c init_mlx.c
+SRC_FILES = main.c init_images.c
 PARSER_FILES = parser.c get_textures.c parser_utils.c check_map.c
 
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES)) $(addprefix $(PARSER_DIR)/, $(PARSER_FILES))

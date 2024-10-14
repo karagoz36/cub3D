@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*   init_images.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 14:52:52 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/11 20:04:23 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:26:37 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	init_txtr_imgs(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-int	mlx_load(t_data *data)
+int	init_images(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)

@@ -6,7 +6,7 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 13:20:28 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/11 13:43:55 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:26:05 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	check_add_texture(char *line, t_texture *texture)
 		return (EXIT_FAILURE);
 	while (*line == ' ')
 		line++;
+	*(ft_strrchr(line, '\n')) = '\0';
 	return (texture->f_name = ft_strdup(line), EXIT_SUCCESS);
 }
 
