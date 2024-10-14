@@ -6,7 +6,7 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 14:52:52 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/14 15:26:37 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:07:04 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,5 @@ int	init_images(t_data *data)
 									&data->img.line_l, &data->img.endian);
 	if (init_txtr_imgs(data))
 		return (ft_putendl_fd("Error\nIn initiation of textures", 2), 1);
-	mlx_put_image_to_window(data->mlx, data->window, data->img.img, 0, 0);
 	return (EXIT_SUCCESS);
 }

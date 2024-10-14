@@ -6,7 +6,7 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:51:28 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/11 18:41:42 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:51:14 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "../libft/libft.h"
 # include "../libft/get_next_line.h"
 # include <stdio.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -53,5 +55,10 @@ typedef struct s_data
 	void		*window;
 	t_image		img;
 }				t_data;
+
+int		key_hook(int keycode, t_data *data);
+int		f_exit(t_data *data);
+int		render(t_data *data);
+void	free_data(t_data *data);
 
 #endif

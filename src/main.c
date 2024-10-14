@@ -6,7 +6,7 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:57:58 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/14 15:24:20 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:48:16 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,14 @@ void	free_data(t_data *data)
 	}
 }
 
+void	start_game(t_data *data)
+{
+	mlx_loop_hook(data->mlx, render, data);
+	mlx_hook(data->window, KeyPress, KeyPressMask, &key_hook, data);
+	mlx_hook(data->window, DestroyNotify, StructureNotifyMask, &f_exit, data);
+	mlx_loop(data->mlx);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
@@ -61,6 +69,7 @@ int	main(int argc, char **argv)
 		return (free_data(&data), EXIT_FAILURE);
 	if (init_images(&data))
 		return (free_data(&data), EXIT_FAILURE);
+	start_game(&data);
 	free_data(&data);
 	return (EXIT_SUCCESS);
 }

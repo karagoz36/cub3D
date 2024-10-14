@@ -6,7 +6,7 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:14:36 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/14 13:26:50 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:51:06 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,5 @@ int		ft_atoi_3d(const char *line);
 void	ft_free(char **str);
 int		check_map(t_data *data);
 int		init_images(t_data *data);
-
 
 #endif
