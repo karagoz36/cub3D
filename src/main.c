@@ -6,7 +6,7 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:57:58 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/16 16:27:46 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/22 18:22:19 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	free_data(t_data *data)
 	t = data->texture;
 	clean_textures(data->texture);
 	ft_free(data->map);
-	t = data->texture;
 	i = -1;
 	while (++i < 4)
 		if (t[i].img)

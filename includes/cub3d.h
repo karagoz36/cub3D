@@ -6,7 +6,7 @@
 /*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 15:51:28 by tkaragoz          #+#    #+#             */
-/*   Updated: 2024/10/14 17:51:14 by tkaragoz         ###   ########.fr       */
+/*   Updated: 2024/10/22 19:11:45 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct s_data
 	char		**map;
 	t_texture	texture[6];
 	int			fd;
-	int			m_max;
 	int			m_len;
 	int			m_width;
 	int			floor;
