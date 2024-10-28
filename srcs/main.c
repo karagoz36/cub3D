@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bince < bince@student.42.fr>               +#+  +:+       +#+        */
+/*   By: tkaragoz <tkaragoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 14:14:46 by bince             #+#    #+#             */
-/*   Updated: 2024/10/28 14:52:38 by bince            ###   ########.fr       */
+/*   Updated: 2024/10/28 17:10:20 by tkaragoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 int	check_arg(int ac, char **av)
 {
+	char	*p;
+
 	if (ac != 2)
-		return (errno = EINVAL, perror("Error\nError in argument!"),
-			EXIT_FAILURE);
-	if (ft_strncmp(ft_strrchr((av[1]), '.'), ".cub\0", 5))
+		return (errno = EINVAL, perror("Error\nError in argument!"), 1);
+	p = ft_strrchr((av[1]), '.');
+	if (!p)
+		return (errno = EINVAL, perror("Error\nError in argument!"), 1);
+	if (ft_strncmp(p, ".cub\0", 5))
 		return (errno = EINVAL, perror("Error\nInvalid map name!"),
 			EXIT_FAILURE);
 	return (EXIT_SUCCESS);
